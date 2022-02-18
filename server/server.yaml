@@ -1,0 +1,19 @@
+motan-server:
+  log_dir: "./logs"
+  application: "default-server"
+
+#config of registries
+motan-registry:
+  direct-registry: # registry id
+    protocol: direct   # registry type
+
+#conf of services
+motan-service:
+  mytest-motan2:
+    path: com.weibo.motan.service.MotanDemoService # e.g. service name for register
+    group: mesh-demo
+    protocol: motan2
+    registry: direct-registry
+    serialization: simple
+    ref : "services.MotanService"
+    export: "motan2:9529"

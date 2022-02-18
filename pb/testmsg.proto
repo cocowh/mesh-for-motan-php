@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "/testmsg";
+option java_multiple_files = true;
+option java_package = "examples.testmsg";
+option java_outer_classname = "TestMsgProto";
+
+package TestMsg;
+
+service Greeter {
+  rpc TransObject(ObjectMessage) returns (ObjectMessage) {}
+}
+
+message ObjectMessage {
+  optional string pString = 1;
+  int32 pInt32 = 2;
+  int64 pInt64 = 3;
+  optional InnerMessage innerMsg = 4;
+  message InnerMessage {
+    map<string,string> tags  = 1;
+  }
+}

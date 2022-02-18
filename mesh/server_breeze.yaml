@@ -1,0 +1,30 @@
+motan-agent:
+  port: 9985 # agent rpc forward proxy port.
+  mport: 8003 # agent manage port
+  log_dir: "./logs"
+  registry: "direct-registry" # registry id for registering agent info
+  application: "agent-test" # agent identify. for agent command notify and so on
+
+#config of registries
+motan-registry:
+  direct-registry: # registry id
+    protocol: direct   # registry type
+  vintage-registry:
+    protocol: vintage
+    host: 10.182.22.200
+    port: 8789
+    registryRetryPeriod: 30000
+    registrySessionTimeout: 10000
+    requestTimeout: 5000
+
+motan-service: # server端配置
+  test:
+    registry: vintage-registry
+    group: mesh-demo
+    path: com.weibo.motan.service.MotanBreezeDemoService
+    export: "motan2:9989"
+    provider: motan2
+    serialization: breeze
+    proxy: "motan2:9530"
+    filter: "accessLog"
+    requestTimeout: 20000000
